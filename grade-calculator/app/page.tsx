@@ -1,113 +1,90 @@
-import Image from "next/image";
+"use client"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import ThemeSwitcher from "@/components/theme-switcher";
 
+type Inputs = {
+  grade: number;
+  weight: number;
+  desiredGrade: number;
+}
 export default function Home() {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+  const [result, setResult] = useState<number | undefined>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const output = Math.round(((data.desiredGrade - data.grade * (data.weight/100)) / ((100 - data.weight)/100))*100)/100;
+    setResult(output);
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <div className="absolute top-2 right-2">
+        <ThemeSwitcher />
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Card className="w-1/5">
+        <CardHeader>
+          <CardTitle>Final Grade Calculator</CardTitle>
+          <CardDescription>Input your current grade and the weight, along with desired grade to see what you need in the rest of the course to get that grade</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form className="flex flex-col space-y-8" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid w-full items-center gap-4">
+              <div className='flex flex-row gap-4 w-full'>
+                <div className="flex flex-col space-y-1.5 w-full">
+                  <Label htmlFor="grade">Current Grade</Label>
+                  <Input
+                    id="grade"
+                    type="number"
+                    min={0} 
+                    max={100}
+                    required {...register("grade")}
+                    endAdornment={<span className="text-sm text-muted-foreground">%</span>}
+                  />
+                </div>
+                <div className='flex flex-col space-y-1.5 w-full'>
+                  <Label htmlFor="weight">Weight</Label>
+                  <Input
+                    id="weight"
+                    min={0}
+                    max={100}
+                    type="number"
+                    required {...register("weight")}
+                    endAdornment={<span className="text-sm text-muted-foreground">%</span>}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col space-y-2">
+              <Label htmlFor="final">Desired Grade</Label>
+              <Input
+                id="final" 
+                type="number" 
+                min={0}
+                max={100}
+                required {...register("desiredGrade")} 
+                endAdornment={<span className="text-sm text-muted-foreground">%</span>}
+              />
+            </div>
+            <Button className="w-full" type="submit">Calculate</Button>
+          </form>
+        </CardContent>
+        {result && (
+          <CardFooter>
+            <CardDescription className="flex flex-col gap-2">
+              <span>You need to get <span className="text-primary font-bold">{result}%</span> in the rest of the course to get your desired grade</span>
+              {result > 100 && <span className="text-red-500">Not even studying can save you!</span>}
+              {90 < result && result <= 100 && <span className="text-green-500">Still possible, lock in!</span>}
+              {result > 70 && result <= 90 && <span className="text-green-500">Better get to studying!</span>}
+              {result >= 50 && result <= 70 && <span className="text-green-500">Shouldn{"'"}t be that hard!</span>}
+              {result < 50 && <span className="text-red-500">Try to bump those numbers up!</span>}
+            </CardDescription>
+          </CardFooter>
+        )}
+      </Card>
     </main>
   );
 }
+
