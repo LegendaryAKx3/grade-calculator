@@ -29,30 +29,30 @@ export default function CurrentGradeCalculator() {
   const [result, setResult] = useState<number | undefined>()
 
   const onSubmit = (data: Inputs) => {
-    // Ensure all weights and grades are treated as numbers
-    const grades = data.grades.map((grade) => ({
-      grade: parseFloat(grade.grade),
-      weight: parseFloat(grade.weight),
-    }));
-  
-    // Calculate the total weight
-    const totalWeight = grades.reduce((sum, grade) => sum + grade.weight, 0);
-  
-    // Calculate the weighted sum - handle cases where total weight is zero
-    let weightedSum = 0;
-    if (totalWeight > 0) {
-      weightedSum = grades.reduce((sum, grade) => {
-        return sum + grade.grade * (grade.weight / totalWeight);
-      }, 0);
-    }
-  
-    // Output the result rounded to 2 decimal places
-    const output = Math.round(weightedSum * 100) / 100;
-  
-    // Set the result to output
-    setResult(output);
-  };
-  
+  // Ensure all weights and grades are treated as numbers
+  const grades = data.grades.map((grade) => ({
+    grade: parseFloat(grade.grade),
+    weight: parseFloat(grade.weight),
+  }));
+
+  // Calculate the total weight
+  const totalWeight = grades.reduce((sum, grade) => sum + grade.weight, 0);
+
+  // Calculate the weighted sum - handle cases where total weight is zero
+  let weightedSum = 0;
+  if (totalWeight > 0) {
+    weightedSum = grades.reduce((sum, grade) => {
+      return sum + grade.grade * (grade.weight / totalWeight);
+    }, 0);
+  }
+
+  // Output the result rounded to 2 decimal places
+  const output = Math.round(weightedSum * 100) / 100;
+
+  // Set the result to output
+  setResult(output);
+};
+
   
 
   return (
