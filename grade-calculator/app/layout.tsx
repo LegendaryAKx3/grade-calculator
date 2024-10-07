@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Grade Calculator",
   description: "Calculate your grades",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
