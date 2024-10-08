@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button"
 import { PlusCircle, Trash2 } from "lucide-react"
 
 type GradeInput = {
-  grade: number
-  weight: number
+  grade: string
+  weight: string
 }
 
 type Inputs = {
@@ -19,7 +19,7 @@ type Inputs = {
 export default function CurrentGradeCalculator() {
   const { register, control, handleSubmit, formState: { errors } } = useForm<Inputs>({
     defaultValues: {
-      grades: [{ grade: 0, weight: 0 }]
+      grades: [{ grade: "0", weight: "0" }]
     }
   })
   const { fields, append, remove } = useFieldArray({
@@ -30,10 +30,12 @@ export default function CurrentGradeCalculator() {
 
   const onSubmit = (data: Inputs) => {
   // Ensure all weights and grades are treated as numbers
-  const grades = data.grades.map((grade) => ({
-    grade: parseFloat(grade.grade),
-    weight: parseFloat(grade.weight),
-  }));
+  const grades = data.grades.map((grade) => {
+    return {
+      grade: parseFloat(grade.grade),
+      weight: parseFloat(grade.weight),
+    }
+  });
 
   // Calculate the total weight
   const totalWeight = grades.reduce((sum, grade) => sum + grade.weight, 0);
@@ -95,7 +97,7 @@ export default function CurrentGradeCalculator() {
         variant="outline"
         size="sm"
         className="mt-2"
-        onClick={() => append({ grade: 0, weight: 0 })}
+        onClick={() => append({ grade: "0", weight: "0" })}
       >
         <PlusCircle className="mr-2 h-4 w-4" />
         Add Grade
