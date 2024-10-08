@@ -107,9 +107,9 @@ export default function CurrentGradeCalculator() {
             Your current weighted average is: <span className="text-primary font-bold">{result}%</span>
           </p>
           {result >= 90 && <p className="text-green-500">Excellent work! Keep it up!</p>}
-          {result >= 80 && result < 90 && <p className="text-green-500">Great job! You're doing well.</p>}
-          {result >= 70 && result < 80 && <p className="text-yellow-500">Good effort. There's room for improvement.</p>}
-          {result >= 60 && result < 70 && <p className="text-yellow-500">You're passing, but try to boost your grades.</p>}
+          {result >= 80 && result < 90 && <p className="text-green-500">Great job! You&apos;re doing well.</p>}
+          {result >= 70 && result < 80 && <p className="text-yellow-500">Good effort. There&apos;s room for improvement.</p>}
+          {result >= 60 && result < 70 && <p className="text-yellow-500">You&apos;re passing, but try to boost your grades.</p>}
           {result < 60 && <p className="text-destructive">You need to work harder to improve your grades.</p>}
         </div>
       )}

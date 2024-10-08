@@ -103,7 +103,7 @@ export default function FinalGradeCalculator() {
           {result > 100 && <p className="text-destructive">Not even studying can save you!</p>}
           {90 < result && result <= 100 && <p className="text-green-500">Still possible, lock in!</p>}
           {result > 70 && result <= 90 && <p className="text-green-500">Better get to studying!</p>}
-          {result >= 50 && result <= 70 && <p className="text-green-500">Shouldn't be that hard!</p>}
+          {result >= 50 && result <= 70 && <p className="text-green-500">Shouldn&apos;t be that hard!</p>}
           {result < 50 && <p className="text-destructive">Try to bump those numbers up!</p>}
         </div>
       )}
