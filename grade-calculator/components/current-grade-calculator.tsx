@@ -19,7 +19,7 @@ type Inputs = {
 export default function CurrentGradeCalculator() {
   const { register, control, handleSubmit, formState: { errors } } = useForm<Inputs>({
     defaultValues: {
-      grades: [{ grade: "0", weight: "0" }]
+      grades: [{ grade: "", weight: "" }]
     }
   })
   const { fields, append, remove } = useFieldArray({
@@ -97,7 +97,7 @@ export default function CurrentGradeCalculator() {
         variant="outline"
         size="sm"
         className="mt-2"
-        onClick={() => append({ grade: "0", weight: "0" })}
+        onClick={() => append({ grade: "", weight: "" })}
       >
         <PlusCircle className="mr-2 h-4 w-4" />
         Add Grade
