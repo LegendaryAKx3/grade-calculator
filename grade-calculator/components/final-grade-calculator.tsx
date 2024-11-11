@@ -8,20 +8,20 @@ import { Button } from "@/components/ui/button"
 import { PlusCircle, Trash2 } from "lucide-react"
 
 type GradeInput = {
-  grade: number
-  weight: number
+  grade: string
+  weight: string
 }
 
 type Inputs = {
   grades: GradeInput[]
-  desiredGrade: number
+  desiredGrade: string
 }
 
 export default function FinalGradeCalculator() {
   const { register, control, handleSubmit, formState: { errors } } = useForm<Inputs>({
     defaultValues: {
-      grades: [{ grade: 0, weight: 0 }],
-      desiredGrade: 0
+      grades: [{ grade: "", weight: "" }],
+      desiredGrade: ""
     }
   })
   const { fields, append, remove } = useFieldArray({
@@ -31,10 +31,19 @@ export default function FinalGradeCalculator() {
   const [result, setResult] = useState<number | undefined>()
 
   const onSubmit = (data: Inputs) => {
-    const totalWeight = data.grades.reduce((sum, grade) => sum + grade.weight, 0);
-    const weightedSum = data.grades.reduce((sum, grade) => sum + (grade.grade * (grade.weight / 100)), 0);
+    const grades = data.grades.map((grade) => {
+      return {
+        grade: parseFloat(grade.grade),
+        weight: parseFloat(grade.weight),
+      }
+    });
+
+    const desiredGrade = parseFloat(data.desiredGrade);
+
+    const totalWeight = grades.reduce((sum, grades) => sum + grades.weight, 0);
+    const weightedSum = grades.reduce((sum, grades) => sum + (grades.grade * (grades.weight / 100)), 0);
     const remainingWeight = 100 - totalWeight
-    const requiredGrade = ((data.desiredGrade - weightedSum) / (remainingWeight / 100));
+    const requiredGrade = ((desiredGrade - weightedSum) / (remainingWeight / 100));
     const output = Math.round(requiredGrade * 100) / 100;    
     setResult(output)
   }
@@ -79,7 +88,7 @@ export default function FinalGradeCalculator() {
         variant="outline"
         size="sm"
         className="mt-2"
-        onClick={() => append({ grade: 0, weight: 0 })}
+        onClick={() => append({ grade: "", weight: "" })}
       >
         <PlusCircle className="mr-2 h-4 w-4" />
         Add Grade
