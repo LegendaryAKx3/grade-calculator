@@ -51,6 +51,7 @@ type GradeInput = {
   
     return (
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="grid grid-cols-2 gap-4">
         {Array(6).fill(0).map((_, index) => (
           <div key={_.id} className="flex items-end space-x-4">
             <div className="flex-1">
@@ -64,8 +65,8 @@ type GradeInput = {
               />
             </div>
             </div>
-            
         ))}
+        </div>
         
         <Button className="w-full" type="submit">Calculate Current Average</Button>
         {result !== undefined && (
