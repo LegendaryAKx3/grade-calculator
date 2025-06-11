@@ -62,17 +62,18 @@ export default function CurrentGradeCalculator() {
       {fields.map((field, index) => (
         <div key={field.id} className="flex items-end space-x-4">
           <div className="flex-1">
-            <Label htmlFor={`grades.${index}.grade`}>Grade {index + 1}</Label>
+            <Label htmlFor={`grades.${index}.grade`}>Grade</Label>
             <Input
               id={`grades.${index}.grade`}
               type="number"
+              step="0.01"
               min={0}
               max={100}
               {...register(`grades.${index}.grade` as const, { required: true, min: 0, max: 100 })}
             />
           </div>
           <div className="flex-1">
-            <Label htmlFor={`grades.${index}.weight`}>Weight {index + 1}</Label>
+            <Label htmlFor={`grades.${index}.weight`}>Weight (%)</Label>
             <Input
               id={`grades.${index}.weight`}
               type="number"

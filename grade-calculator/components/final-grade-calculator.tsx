@@ -57,13 +57,14 @@ export default function FinalGradeCalculator() {
             <Input
               id={`grades.${index}.grade`}
               type="number"
+              step="0.01"
               min={0}
               max={100}
               {...register(`grades.${index}.grade` as const, { required: true, min: 0, max: 100 })}
             />
           </div>
           <div className="flex-1">
-            <Label htmlFor={`grades.${index}.weight`}>Weight</Label>
+            <Label htmlFor={`grades.${index}.weight`}>Weight (%)</Label>
             <Input
               id={`grades.${index}.weight`}
               type="number"
@@ -98,6 +99,7 @@ export default function FinalGradeCalculator() {
         <Input
           id="desiredGrade"
           type="number"
+          step="0.01"
           min={0}
           max={100}
           {...register("desiredGrade", { required: true, min: 0, max: 100 })}
